@@ -189,9 +189,18 @@ async function run() {
             res.send(result);
         })
 
-        app.get('/contacts', async (req, res) => {
+        app.get('/contacts/dashboard', async (req, res) => {
             const contacts = await adminContactCollection.find().toArray()
             res.send(contacts)
+        })
+        app.get('/contacts', async (req, res) => {
+            const query = req.query
+            const limit = 6
+            const skip = Number(query.pageNumber);
+            const contacts = await adminContactCollection.find().skip(limit * skip).limit(limit).toArray()
+            const count = await adminContactCollection.countDocuments()
+            const pageCount = Math.ceil(count / limit);
+            res.send({ contacts: contacts, pageCount: pageCount })
         })
 
         app.get('/all-admin', verifyJWT, async (req, res) => {
@@ -467,7 +476,7 @@ async function run() {
                 }
             }
             const updatedDonorInfo = await bloodDonorCollection.updateOne(filter, updateDoc)
-            res.send({updateDoc, success: true})
+            res.send({ updateDoc, success: true })
         })
 
         app.patch('/donationCount/:id', async (req, res) => {
