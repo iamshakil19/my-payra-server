@@ -575,7 +575,7 @@ async function run() {
 run().catch(console.dir)
 
 app.get('/', (req, res) => {
-    res.send('running payra server')
+    res.send('running my payra server')
 })
 app.listen(port, () => {
     console.log("payra app listening to port", port);
