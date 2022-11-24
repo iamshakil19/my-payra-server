@@ -10,7 +10,7 @@ const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 app.use(cors());
 app.use(express.json())
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.bqjy6zm.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.1dib4wk.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 const verifyJWT = (req, res, next) => {
@@ -28,23 +28,18 @@ const verifyJWT = (req, res, next) => {
     })
 }
 
-/* 
-NOTHING
-*/
-
-
 async function run() {
     try {
         await client.connect();
-        const bloodDonorCollection = client.db('payra').collection('donor-list')
-        const bloodRequestCollection = client.db('payra').collection('blood-request-list')
-        const userCollection = client.db('payra').collection('users')
-        const adminContactCollection = client.db('payra').collection('admin-contact')
-        const divisionCollection = client.db('payra').collection('divisions')
-        const districtCollection = client.db('payra').collection('districts')
-        const upazilaCollection = client.db('payra').collection('upazilas')
-        const unionCollection = client.db('payra').collection('unions')
-        const villageCollection = client.db('payra').collection('villages')
+        const bloodDonorCollection = client.db('my-payra').collection('donor-list')
+        const bloodRequestCollection = client.db('my-payra').collection('blood-request-list')
+        const userCollection = client.db('my-payra').collection('users')
+        const adminContactCollection = client.db('my-payra').collection('admin-contact')
+        const divisionCollection = client.db('my-payra').collection('divisions')
+        const districtCollection = client.db('my-payra').collection('districts')
+        const upazilaCollection = client.db('my-payra').collection('upazilas')
+        const unionCollection = client.db('my-payra').collection('unions')
+        const villageCollection = client.db('my-payra').collection('villages')
 
 
         /* =======================
