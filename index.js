@@ -323,7 +323,7 @@ async function run() {
             ALL BLOOD DONOR API
             ======================== */
 
-        app.get('/top-donor', verifyJWT, async (req, res) => {
+        app.get('/top-donor', async (req, res) => {
             const sortDonor = { donationCount: -1 }
             const topDonor = await bloodDonorCollection.find().sort(sortDonor).toArray()
             res.send(topDonor)
